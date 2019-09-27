@@ -5,19 +5,27 @@ const { transports } = winston;
 const { combine, printf, timestamp, colorize } = winston.format;
 
 const myFormat = printf(({ message, level, timestamp }) => {
-    let length = 9;
+    const length = 9;
     let rx = level.match(/debug|error|info|warn|silly|verbose/)[0];
 
-    if (!rx) rx = 'INFO';
+    if (!rx) {
+        rx = 'INFO';
+    }
     level = level.replace(rx, rx.toUpperCase());
 
-    let freeSpace = length - rx.length;
-    let before = ' '.repeat(freeSpace / 2), after = ' '.repeat(freeSpace / 2);
+    const freeSpace = length - rx.length;
+    const before = ' '.repeat(freeSpace / 2);
+    const after = ' '.repeat(freeSpace / 2);
 
-    return `[${ before }${ level }${ after }]${ !(rx.length % 2) ? ' ' : '' } - ${ moment(timestamp).format('YYYY-MM-DD hh:mm:ss') } : ${ message }`;
+    if (typeof message === 'object') {
+        message = JSON.stringify(message);
+    }
+
+    return `[${ before }${ level }${ after }]${ !(rx.length % 2) ? ' ' : '' } -` +
+        ` ${ moment(timestamp).format('YYYY-MM-DD hh:mm:ss') } : ${ message }`;
 });
 
-const logger = winston.createLogger({
+const Logger = winston.createLogger({
     level: 'silly',
     format: combine(
         colorize(),
@@ -31,4 +39,4 @@ const logger = winston.createLogger({
     ]
 });
 
-export { logger };
+export { Logger };

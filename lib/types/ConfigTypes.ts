@@ -1,6 +1,6 @@
 interface IConfig {
     PORT: number;
-    DB: IDBConnection
+    DB: IDBConnection;
 }
 
 interface IDBConnection {
@@ -14,5 +14,5 @@ interface IDBConnection {
 
 export {
     IConfig,
-    IDBConnection,
+    IDBConnection
 };

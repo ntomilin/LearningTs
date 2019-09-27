@@ -16,13 +16,22 @@
         "max-classes-per-file": 1,
         "arrow-return-shorthand": true,
         "class-name": true,
-        "completed-docs": true,
+        "completed-docs": false,
         "interface-name": true,
-        "newline-per-chained-call": true,
+        "newline-per-chained-call": false,
         "no-boolean-literal-compare": true,
         "prefer-method-signature": true,
-        "space-before-function-paren": true,
-        "eofline": true
+        "space-before-function-paren": false,
+        "eofline": true,
+        "no-string-literal": false,
+        "newline-before-return": false,
+        "quotemark": [true, "single"],
+        "space-within-parens": false,
+        "no-unused-expression": false,
+        "no-unused-variable": false,
+        "trailing-comma": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }

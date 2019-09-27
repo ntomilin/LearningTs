@@ -11,10 +11,10 @@ let config: IConfig;
 
 switch (mode) {
     // case ENV.PROD:
-    //     config = {};
+    //     config = {} as IConfig;
     //     break;
     // case ENV.TEST:
-    //     config = {};
+    //     config = {} as IConfig;
     //     break;
     case ENV.DEV:
     default:
@@ -22,9 +22,9 @@ switch (mode) {
             PORT: 1,
 
             DB: {
-                type: '',
+                type: 'postgres',
                 host: '',
-                port: '',
+                port: 0,
                 username: '',
                 password: '',
                 database: ''
