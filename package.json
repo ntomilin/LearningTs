@@ -1,4 +1,9 @@
 {
+  "version": "0.1.1",
+  "author": {
+    "email": "ntomilin@ukr.net",
+    "name": "Nikita Tomilin"
+  },
   "scripts": {
     "build:watch": "tsc -w",
     "build": "tsc -w",

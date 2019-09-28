@@ -2,15 +2,18 @@ import { Logger } from './LoggerManager';
 
 export class ServiceManager {
 
+
     public static createServices(app, serverConstructor) {
         const servicesConstructors = Reflect.getMetadata('services', serverConstructor);
 
         return new Promise((resolve) => {
-            new ServiceManager(servicesConstructors);
+            const services = new ServiceManager(servicesConstructors);
             Logger.info('Finished registering services');
-            resolve();
+            resolve(services);
         });
     }
+
+    // private static services;
 
     private constructor(servicesConstructors: Array<(...args) => void>) {
         Logger.info('Registering services...');
@@ -40,11 +43,11 @@ export class ServiceManager {
             }
 
             if (allParamsAreCreated) {
-                const services = [];
+                const paramServices = [];
                 for (const paramIndex of paramIndexes) {
-                    services.push(createdServices[paramIndex]);
+                    paramServices.push(createdServices[paramIndex]);
                 }
-                createdServices[i] = new servicesConstructors[i](...services);
+                createdServices[i] = new servicesConstructors[i](...paramServices);
                 createdServicesNames[i] = servicesConstructors[i].name;
                 Logger.info(`Service [${ createdServicesNames[i] }] created`);
             }
@@ -57,5 +60,12 @@ export class ServiceManager {
                 i = -1;
             }
         }
+
+        const services = {};
+        for (let i = 0; i < createdServices.length; i++) {
+            services[createdServicesNames[i]] = createdServices[i];
+        }
+
+        return services;
     }
 }

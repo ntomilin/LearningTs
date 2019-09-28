@@ -12,8 +12,8 @@ class HttpServer {
         HttpServer.app = express();
         HttpServer.app.listen(port, host, async () => {
             Logger.info(`Server started on [host = ${ host }] [port = ${ port }]`);
-            await ServiceManager.createServices(HttpServer.app, this.constructor);
-            await RouteManager.bindRoutes(HttpServer.app, this.constructor);
+            const services = await ServiceManager.createServices(HttpServer.app, this.constructor);
+            await RouteManager.bindRoutes(HttpServer.app, this.constructor, services);
         });
     }
 }

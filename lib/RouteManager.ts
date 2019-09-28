@@ -3,26 +3,32 @@ import { HTTP_METHODS } from './types/HTTP_METHODS';
 
 export default class RouteManager {
 
-    public static bindRoutes(app, serverConstructor) {
+    public static bindRoutes(app, serverConstructor, services) {
         const routes = Reflect.getMetadata('routes', serverConstructor);
         return new Promise((resolve) => {
-            new RouteManager(app, routes);
+            new RouteManager(app, routes, services);
             Logger.info('Finished registering routes');
             resolve();
         });
     }
 
-    private constructor(app, controllers: Array<() => void>) {
+    private constructor(app, controllers: Array<(...args) => void>, services) {
         Logger.info(`Registering routes...`);
         const methods = Object.values(HTTP_METHODS)
             .filter(isNaN);
         controllers.forEach((instance) => {
+            const paramsData = Reflect.getMetadata('params', instance);
+            const params = [];
+            for (const param of paramsData) {
+                params.push(services[param]);
+            }
+            const obj = new instance(...params);
             for (const httpMethod of methods) {
                 const handlers = Reflect.getMetadata(HTTP_METHODS[httpMethod], instance);
                 if (handlers && handlers.length) {
-                    for (const handler of handlers) {
-                        const path = instance['path'] + handler.path;
-                        this.linkMethod(httpMethod, app, path, handler.handler.value);
+                    for (const handlerObject of handlers) {
+                        const path = instance['path'] + handlerObject.path;
+                        this.linkMethod(httpMethod, app, path, handlerObject.handler.value.bind(obj));
                         Logger.info(`Handler to ${ httpMethod } ${ path } registered`);
                     }
                 }

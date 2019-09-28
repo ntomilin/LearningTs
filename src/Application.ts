@@ -8,10 +8,12 @@ import { EService } from './services/E.service';
 import { FService } from './services/F.service';
 import { Global } from '../lib/decorators/Global';
 import { Users } from './entities/Users';
+import { TestController } from './controllers/Test.controller';
 
 @Global({
     endpoints: [
-        UserController
+        UserController,
+        TestController
     ],
     services: [
         AService,
