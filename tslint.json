@@ -20,7 +20,7 @@
         "interface-name": true,
         "newline-per-chained-call": false,
         "no-boolean-literal-compare": true,
-        "prefer-method-signature": true,
+        "prefer-method-signature": false,
         "space-before-function-paren": false,
         "eofline": true,
         "no-string-literal": false,

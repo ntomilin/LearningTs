@@ -7,6 +7,7 @@ import { DService } from './services/D.service';
 import { EService } from './services/E.service';
 import { FService } from './services/F.service';
 import { Global } from '../lib/decorators/Global';
+import { Users } from './entities/Users';
 
 @Global({
     endpoints: [
@@ -20,7 +21,9 @@ import { Global } from '../lib/decorators/Global';
         FService,
         EService,
     ],
-    entities: []
+    entities: [
+        Users
+    ]
 })
 export class Application extends HttpServer {
     constructor(port: number, host: string = '127.0.0.1') {
