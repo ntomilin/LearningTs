@@ -7,13 +7,13 @@ export class ServiceManager {
 
         return new Promise((resolve) => {
             new ServiceManager(servicesConstructors);
-            Logger.info('Services created');
+            Logger.info('Finished registering services');
             resolve();
         });
     }
 
     private constructor(servicesConstructors: Array<(...args) => void>) {
-        Logger.info('Creating services...');
+        Logger.info('Registering services...');
         const createdServices = [];
         const createdServicesNames = [];
         for (let i = 0; i < servicesConstructors.length; i++) {

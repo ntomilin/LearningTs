@@ -7,13 +7,13 @@ export default class RouteManager {
         const routes = Reflect.getMetadata('routes', serverConstructor);
         return new Promise((resolve) => {
             new RouteManager(app, routes);
-            Logger.info('Finished binding routes');
+            Logger.info('Finished registering routes');
             resolve();
         });
     }
 
     private constructor(app, controllers: Array<() => void>) {
-        Logger.info(`Binding routes...`);
+        Logger.info(`Registering routes...`);
         const methods = Object.values(HTTP_METHODS)
             .filter(isNaN);
         controllers.forEach((instance) => {
@@ -23,7 +23,7 @@ export default class RouteManager {
                     for (const handler of handlers) {
                         const path = instance['path'] + handler.path;
                         this.linkMethod(httpMethod, app, path, handler.handler.value);
-                        Logger.info(`Link ${ httpMethod } to ${ path }`);
+                        Logger.info(`Handler to ${ httpMethod } ${ path } registered`);
                     }
                 }
             }
