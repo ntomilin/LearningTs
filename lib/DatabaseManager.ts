@@ -25,6 +25,7 @@ export default class DatabaseManager {
     private constructor(dbConfig: IDBConnection) {
         this.connectionConfiguration = {
             ...dbConfig,
+            // It shouldn't be like this
             entities: [
                 Users
             ],
