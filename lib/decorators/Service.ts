@@ -16,5 +16,5 @@ export function Service() {
 export interface IServiceMetadata {
     params: string[];
 
-    constructor: () => void;
+    constructor: (...args) => void;
 }

@@ -4,7 +4,7 @@ import * as moment from 'moment';
 const { transports } = winston;
 const { combine, printf, timestamp, colorize } = winston.format;
 
-const myFormat = printf(({ message, level, timestamp }) => {
+const myFormat = printf(({ message, level, time }) => {
     const length = 9;
     let rx = level.match(/debug|error|info|warn|silly|verbose/)[0];
 
@@ -22,7 +22,7 @@ const myFormat = printf(({ message, level, timestamp }) => {
     }
 
     return `[${ before }${ level }${ after }]${ !(rx.length % 2) ? ' ' : '' } -` +
-        ` ${ moment(timestamp).format('YYYY-MM-DD hh:mm:ss') } : ${ message }`;
+        ` ${ moment(time).format('YYYY-MM-DD HH:mm:ss') } : ${ message }`;
 });
 
 const Logger = winston.createLogger({

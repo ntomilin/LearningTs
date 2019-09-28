@@ -5,7 +5,6 @@ import { Post } from '../../lib/decorators/Post';
 @Route('/users')
 export class UserController {
     constructor() {
-        console.log(`controller constructor`)
     }
 
     @Get()

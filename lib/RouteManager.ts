@@ -30,7 +30,7 @@ export default class RouteManager {
         });
     }
 
-    private linkMethod(httpMethod: string, app, path, handler) {
+    private linkMethod(httpMethod: string | HTTP_METHODS, app, path, handler) {
         if (HTTP_METHODS[httpMethod] === HTTP_METHODS.GET) {
             app.get(path, handler);
         } else if (HTTP_METHODS[httpMethod] === HTTP_METHODS.POST) {
