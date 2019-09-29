@@ -1,6 +1,6 @@
-import { Route } from '../../lib/decorators/Route';
-import { Get } from '../../lib/decorators/Get';
+import { Get } from '../../lib/decorators/Methods';
 import { AService } from '../services/A.service';
+import { Route } from '../../lib/decorators/Classes';
 
 @Route('/test')
 export class TestController {

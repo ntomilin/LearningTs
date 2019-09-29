@@ -1,6 +1,6 @@
 import { BService } from './B.service';
 import { CService } from './C.service';
-import { Service } from '../../lib/decorators/Service';
+import { Service } from '../../lib/decorators/Classes';
 
 @Service()
 export class AService {

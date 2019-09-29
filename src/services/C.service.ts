@@ -1,5 +1,5 @@
 import { DService } from './D.service';
-import { Service } from '../../lib/decorators/Service';
+import { Service } from '../../lib/decorators/Classes';
 
 @Service()
 export class CService {

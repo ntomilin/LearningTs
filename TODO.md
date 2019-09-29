@@ -3,4 +3,7 @@
 3. [x] Add services into controllers
 4. [x] Register entities through decorators
 5. [ ] Create middleware decorators 
-  
+6. [ ] Create Viber module
+7. [ ] Create Telegram module
+8. [ ] Create Message converter
+9. [ ] Create State manager
