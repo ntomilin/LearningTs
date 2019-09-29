@@ -4,15 +4,18 @@ import * as core from 'express-serve-static-core';
 import 'reflect-metadata';
 import RouteManager from './RouteManager';
 import { ServiceManager } from './ServiceManager';
+import DatabaseManager from './DatabaseManager';
+import { IConfig } from './types/ConfigTypes';
 
 class HttpServer {
     public static app: core.Express;
 
-    public constructor(port: number, host: string) {
+    public constructor(config: IConfig) {
         HttpServer.app = express();
-        HttpServer.app.listen(port, host, async () => {
-            Logger.info(`Server started on [host = ${ host }] [port = ${ port }]`);
+        HttpServer.app.listen(config.PORT, '127.0.0.1', async () => {
+            Logger.info(`Server started on [host = 127.0.0.1] [port = ${ config.PORT }]`);
             const services = await ServiceManager.createServices(HttpServer.app, this.constructor);
+            await DatabaseManager.init(config.DB, this.constructor);
             await RouteManager.bindRoutes(HttpServer.app, this.constructor, services);
         });
     }

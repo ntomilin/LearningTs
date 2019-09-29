@@ -10,6 +10,8 @@ import { Global } from '../lib/decorators/Global';
 import { Users } from './entities/Users';
 import { TestController } from './controllers/Test.controller';
 
+import { IConfig } from '../lib/types/ConfigTypes';
+
 @Global({
     endpoints: [
         UserController,
@@ -28,8 +30,8 @@ import { TestController } from './controllers/Test.controller';
     ]
 })
 export class Application extends HttpServer {
-    constructor(port: number, host: string = '127.0.0.1') {
-        super(port, host);
+    constructor(config: IConfig) {
+        super(config);
     }
 
 }

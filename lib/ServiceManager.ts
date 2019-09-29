@@ -2,7 +2,6 @@ import { Logger } from './LoggerManager';
 
 export class ServiceManager {
 
-
     public static createServices(app, serverConstructor) {
         const servicesConstructors = Reflect.getMetadata('services', serverConstructor);
 
@@ -12,8 +11,6 @@ export class ServiceManager {
             resolve(services);
         });
     }
-
-    // private static services;
 
     private constructor(servicesConstructors: Array<(...args) => void>) {
         Logger.info('Registering services...');

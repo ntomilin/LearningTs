@@ -3,13 +3,17 @@ import { createConnection } from 'typeorm';
 import { Logger } from './LoggerManager';
 import { IDBConnection } from './types/ConfigTypes';
 
-import { Users } from '../src/entities/Users';
-
 export default class DatabaseManager {
 
-    public static connectToDatabase(dbConfig: IDBConnection) {
-        const dm = new DatabaseManager(dbConfig);
-        return createConnection(dm.connectionConfiguration)
+    public static init(dbConfig: IDBConnection, serverConstructor) {
+        const entities = Reflect.getMetadata('entities', serverConstructor);
+        const conf = {
+            ...dbConfig,
+            entities,
+            synchronize: true,
+            logging: false
+        };
+        return createConnection(conf)
             .then(() => {
                 Logger.info('Connected to database');
             })
@@ -18,19 +22,5 @@ export default class DatabaseManager {
                 Logger.error(err);
                 process.exit(-1);
             });
-    }
-
-    private connectionConfiguration;
-
-    private constructor(dbConfig: IDBConnection) {
-        this.connectionConfiguration = {
-            ...dbConfig,
-            // It shouldn't be like this
-            entities: [
-                Users
-            ],
-            synchronize: true,
-            logging: false
-        };
     }
 }
