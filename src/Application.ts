@@ -1,16 +1,20 @@
+import { Global } from '../lib/decorators/Classes';
+import { IConfig } from '../lib/types/ConfigTypes';
 import { HttpServer } from '../lib/HttpServerManager';
+
 import { UserController } from './controllers/User.controller';
+import { TestController } from './controllers/Test.controller';
+
 import { AService } from './services/A.service';
 import { BService } from './services/B.service';
 import { CService } from './services/C.service';
 import { DService } from './services/D.service';
 import { EService } from './services/E.service';
 import { FService } from './services/F.service';
-import { Global } from '../lib/decorators/Global';
-import { Users } from './entities/Users';
-import { TestController } from './controllers/Test.controller';
 
-import { IConfig } from '../lib/types/ConfigTypes';
+import { Users } from './entities/Users';
+
+import { MainMenu } from './scenes/MainMenu';
 
 @Global({
     endpoints: [
@@ -27,6 +31,9 @@ import { IConfig } from '../lib/types/ConfigTypes';
     ],
     entities: [
         Users
+    ],
+    scenes: [
+        MainMenu,
     ]
 })
 export class Application extends HttpServer {
