@@ -1,11 +1,13 @@
 import { Logger } from './LoggerManager';
 import { HTTP_METHODS } from './types/HTTP_METHODS';
+import { TelegramModule } from './TelegramModule';
 
 export default class RouteManager {
 
     public static bindRoutes(app, serverConstructor, services) {
         const routes = Reflect.getMetadata('routes', serverConstructor);
         return new Promise((resolve) => {
+            app.post('/wh/telegram', TelegramModule.processTelegramMessage);
             new RouteManager(app, routes, services);
             Logger.info('Finished registering routes');
             resolve();
