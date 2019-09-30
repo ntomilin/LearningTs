@@ -1,15 +1,22 @@
 import { IInnerMessageObject } from './types/InnerMessage';
 import { SceneManager } from './SceneManager';
+import { StateManager } from './StateManager';
+import { SessionState } from './SessionState';
 
 export class MessageHandler {
-    public static processMessage(message: IInnerMessageObject): any {
-        // get state
-        let state = {};
 
-        SceneManager.handleMessage(message);
-        // store state
-        state = {};
+    private stateManager: StateManager;
 
-        return state;
+    constructor() {
+        this.stateManager = new StateManager();
+    }
+
+    public async processMessage(message: SessionState): Promise<any> {
+
+        let state = message.getValue();
+        state = SceneManager.handleMessage(message);
+        await message.setState(state);
+
+        return;
     }
 }

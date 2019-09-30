@@ -1,29 +1,31 @@
 import { IInnerMessageObject } from './types/InnerMessage';
 import { Logger } from './LoggerManager';
+import { SessionState } from './SessionState';
 
 export class SceneManager {
 
     private static readonly scenes = {};
 
-    // TODO: add second parameter - state
-    // TODO: Take scene from state and call needed handler
-    public static handleMessage(message: IInnerMessageObject) {
-        if (message.message.text) {
-            if (SceneManager.scenes['MainMenu']['onText']) {
-                return SceneManager.scenes['MainMenu']['onText'](message);
+    public static async handleMessage(state: SessionState) {
+        const message = state.getMessage();
+        const scene = await state.getScene();
+        if (message.text) {
+            if (SceneManager.scenes[scene]['onText']) {
+                return SceneManager.scenes[scene]['onText'](message);
             }
         }
-        if (message.message.contact) {
-            if (SceneManager.scenes['MainMenu']['onContact']) {
-                return SceneManager.scenes['MainMenu']['onContact'](message);
+        if (message.contact) {
+            if (SceneManager.scenes[scene]['onContact']) {
+                return SceneManager.scenes[scene]['onContact'](message);
             }
         }
-        if (message.message.location) {
-            if (SceneManager.scenes['MainMenu']['onLocation']) {
-                return SceneManager.scenes['MainMenu']['onLocation'](message);
+        if (message.location) {
+            if (SceneManager.scenes[scene]['onLocation']) {
+                return SceneManager.scenes[scene]['onLocation'](message);
             }
         }
         // TODO: implement other messages types
+        // TODO: return new context after scene edition
     }
 
     public static registerScenes(serverConstructor) {

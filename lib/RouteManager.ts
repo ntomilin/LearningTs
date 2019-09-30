@@ -4,10 +4,12 @@ import { TelegramModule } from './TelegramModule';
 
 export default class RouteManager {
 
-    public static bindRoutes(app, serverConstructor, services) {
+    public static bindRoutes(app, serverConstructor, services, telegramModule) {
         const routes = Reflect.getMetadata('routes', serverConstructor);
+
+        app.post('/wh/telegram', telegramModule.processTelegramMessage.bind(telegramModule));
+
         return new Promise((resolve) => {
-            app.post('/wh/telegram', TelegramModule.processTelegramMessage);
             new RouteManager(app, routes, services);
             Logger.info('Finished registering routes');
             resolve();
