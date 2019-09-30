@@ -16,6 +16,22 @@ export function Post(path = '') {
     };
 }
 
+export function Delete(path = '') {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        const arr = Reflect.getMetadata(HTTP_METHODS.DELETE, target.constructor) || [];
+        arr.push({ handler: descriptor, path });
+        Reflect.defineMetadata(HTTP_METHODS.DELETE, arr, target.constructor);
+    };
+}
+
+export function Put(path = '') {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        const arr = Reflect.getMetadata(HTTP_METHODS.PUT, target.constructor) || [];
+        arr.push({ handler: descriptor, path });
+        Reflect.defineMetadata(HTTP_METHODS.PUT, arr, target.constructor);
+    };
+}
+
 export function SceneHandler() {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         const arr = Reflect.getMetadata('handlers', target.constructor) || [];
