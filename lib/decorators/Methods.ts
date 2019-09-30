@@ -15,3 +15,9 @@ export function Post(path = '') {
         Reflect.defineMetadata(HTTP_METHODS.POST, arr, target.constructor);
     };
 }
+
+export function SceneHandler() {
+    return (targen: any, properyKey: string, deskriptor: PropertyDescriptor) => {
+
+    };
+}

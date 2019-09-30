@@ -36,7 +36,7 @@ export function Service() {
 
 export function Scene(name: string) {
     return (constructor) => {
-        constructor.name = name;
+        // constructor.name = name;
     };
 }
 

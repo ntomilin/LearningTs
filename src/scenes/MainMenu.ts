@@ -1,5 +1,6 @@
 import { IScenePrototype } from '../../lib/types/ScenePrototype';
 import { Scene } from '../../lib/decorators/Classes';
+import { SceneHandler } from '../../lib/decorators/Methods';
 
 @Scene('MainMenu')
 export class MainMenu implements IScenePrototype {
@@ -7,6 +8,7 @@ export class MainMenu implements IScenePrototype {
 
     }
 
+    @SceneHandler()
     public onText(ctx) {
         // implementation
     }
