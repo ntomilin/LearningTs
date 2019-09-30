@@ -4,6 +4,7 @@ import { ITelegramMessageObject } from './types/TelegramMessage';
 import { MessageConverter } from './MessageConverter';
 import { IInnerMessageObject } from './types/InnerMessage';
 import { SceneManager } from './SceneManager';
+import { MessageHandler } from './MessageHandler';
 
 export class TelegramModule {
 
@@ -19,11 +20,9 @@ export class TelegramModule {
         const telegramMessageObject: ITelegramMessageObject = req.body;
 
         const message: IInnerMessageObject = MessageConverter.convertTelegramMessage(telegramMessageObject);
-        // get state
-        SceneManager.handleMessage(message);
-        // store state
-        // parse message again
-        // send message
+        const reply = MessageHandler.processMessage(message);
+        const telegramObject = MessageConverter.convertToTelegramMessage(reply);
 
+        // send message
     }
 }

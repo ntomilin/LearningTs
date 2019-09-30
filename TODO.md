@@ -7,3 +7,5 @@
 7. [ ] Create Telegram module
 8. [ ] Create Message converter
 9. [ ] Create State manager
+10. [x] Register scenes through decorators
+11. [ ] Create Message Handler
