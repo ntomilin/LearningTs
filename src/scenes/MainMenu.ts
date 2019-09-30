@@ -10,6 +10,12 @@ export class MainMenu implements IScenePrototype {
 
     @SceneHandler()
     public onText(ctx) {
+        console.log(`on text implementation`);
+        // implementation
+    }
+
+    @SceneHandler()
+    public onLocation(ctx) {
         // implementation
     }
 }

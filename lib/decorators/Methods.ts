@@ -17,7 +17,9 @@ export function Post(path = '') {
 }
 
 export function SceneHandler() {
-    return (targen: any, properyKey: string, deskriptor: PropertyDescriptor) => {
-
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        const arr = Reflect.getMetadata('handlers', target.constructor) || [];
+        arr.push({ handler: descriptor, event: propertyKey });
+        Reflect.defineMetadata('handlers', arr, target.constructor);
     };
 }

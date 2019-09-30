@@ -40,5 +40,4 @@ export class Application extends HttpServer {
     constructor(config: IConfig) {
         super(config);
     }
-
 }

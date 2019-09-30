@@ -8,6 +8,7 @@ import DatabaseManager from './DatabaseManager';
 import { IConfig } from './types/ConfigTypes';
 import { TelegramModule } from './TelegramModule';
 import * as bodyParser from 'body-parser';
+import { SceneManager } from './SceneManager';
 
 class HttpServer {
     public static app: core.Express;
@@ -21,6 +22,7 @@ class HttpServer {
             await DatabaseManager.init(config.DB, this.constructor);
             await RouteManager.bindRoutes(HttpServer.app, this.constructor, services);
             new TelegramModule(config.BOTS.TELEGRAM);
+            await SceneManager.registerScenes(this.constructor);
         });
 
     }
