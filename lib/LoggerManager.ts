@@ -9,7 +9,7 @@ const myFormat = printf(({ message, level, time }) => {
     let rx = level.match(/debug|error|info|warn|silly|verbose/)[0];
 
     if (!rx) {
-        rx = 'INFO';
+        rx = 'info';
     }
     level = level.replace(rx, rx.toUpperCase());
 

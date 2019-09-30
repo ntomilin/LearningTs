@@ -1,6 +1,6 @@
 import { Global } from '../lib/decorators/Classes';
 import { IConfig } from '../lib/types/ConfigTypes';
-import { HttpServer } from '../lib/HttpServerManager';
+import { HttpServer } from '../lib/HttpServer';
 
 import { UserController } from './controllers/User.controller';
 import { TestController } from './controllers/Test.controller';
