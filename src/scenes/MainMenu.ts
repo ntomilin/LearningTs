@@ -9,8 +9,9 @@ export class MainMenu implements IScenePrototype {
     }
 
     @SceneHandler()
-    public async onText(ctx: SessionState) {
-        return ctx;
+    public async onText(state: SessionState) {
+        await state.sendTextMessage('Some text here');
+        return state;
     }
 
     @SceneHandler()

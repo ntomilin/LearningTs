@@ -4,7 +4,6 @@ import { ITelegramMessageObject } from './types/TelegramMessage';
 import { MessageConverter } from './MessageConverter';
 import { IInnerMessageObject } from './types/InnerMessage';
 import { MessageHandler } from './MessageHandler';
-import { SessionState } from './SessionState';
 import { StateManager } from './StateManager';
 
 export class TelegramModule {
@@ -23,6 +22,14 @@ export class TelegramModule {
         const telegramMessageObject: ITelegramMessageObject = req.body;
         const message: IInnerMessageObject = MessageConverter.convertTelegramMessage(telegramMessageObject);
 
-        await this.messageHandler.processMessage(message, this.stateManager);
+        await this.messageHandler.processMessage(message, this.stateManager, {
+            telegram: {
+                sendTextMessage: this.sendTextMessage.bind(this),
+            }
+        });
+    }
+
+    public async sendTextMessage(userId: string, messageObject: string) {
+        await this.tgApi.sendMessage(userId, messageObject);
     }
 }

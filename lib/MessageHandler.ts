@@ -11,9 +11,9 @@ export class MessageHandler {
         this.stateManager = new StateManager();
     }
 
-    public async processMessage(message: IInnerMessageObject, stateManager: StateManager): Promise<any> {
+    public async processMessage(message: IInnerMessageObject, stateManager: StateManager, platformApi): Promise<any> {
         const userState: object = await stateManager.getState(message.user.id);
-        const session: SessionState = new SessionState(message, userState);
+        const session: SessionState = new SessionState(message, userState, platformApi);
         const newState = (await SceneManager.handleMessage(session)).getState();
         await stateManager.setState(message.user.id, newState);
         return;
