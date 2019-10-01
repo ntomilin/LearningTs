@@ -3,7 +3,7 @@ export function Global(config: IGlobalObject) {
         Reflect.defineMetadata('routes', config.endpoints, constructor);
         Reflect.defineMetadata('services', config.services, constructor);
         Reflect.defineMetadata('entities', config.entities, constructor);
-        Reflect.defineMetadata('scenes', config.scenes, constructor)
+        Reflect.defineMetadata('scenes', config.scenes, constructor);
     };
 }
 

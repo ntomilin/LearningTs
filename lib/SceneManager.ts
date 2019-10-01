@@ -1,4 +1,3 @@
-import { IInnerMessageObject } from './types/InnerMessage';
 import { Logger } from './LoggerManager';
 import { SessionState } from './SessionState';
 
@@ -25,8 +24,6 @@ export class SceneManager {
             }
         }
         return state;
-        // TODO: implement other messages types
-        // TODO: return new context after scene edition
     }
 
     public static registerScenes(serverConstructor) {
