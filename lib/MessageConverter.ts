@@ -35,14 +35,4 @@ export class MessageConverter {
             message
         };
     }
-
-    public static convertToViberMessage(message: any): any {
-        const convertedMessage: any = {};
-        return convertedMessage;
-    }
-
-    public static convertToTelegramMessage(message: any): any {
-        const convertedMessage: any = {};
-        return convertedMessage;
-    }
 }

@@ -9,17 +9,17 @@ export class SceneManager {
         const message = state.getMessage();
         const scene = await state.getScene();
         if (message.text) {
-            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onText']) {
+            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onText'] === 'function') {
                 return await SceneManager.scenes[scene]['onText'](state);
             }
         }
         if (message.contact) {
-            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onContact']) {
+            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onContact'] === 'function') {
                 return await SceneManager.scenes[scene]['onContact'](state);
             }
         }
         if (message.location) {
-            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onLocation']) {
+            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onLocation'] === 'function') {
                 return await SceneManager.scenes[scene]['onLocation'](state);
             }
         }
