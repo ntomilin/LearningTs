@@ -6,6 +6,8 @@
 6. [ ] Create Viber module
 7. [ ] Create Telegram module
 8. [ ] Create Message converter
-9. [ ] Create State manager
+9. [x] Create State manager
 10. [x] Register scenes through decorators
 11. [ ] Create Message Handler
+12. [ ] Create all Bots Api methods
+13. [ ] Create types for Bots Api methods
