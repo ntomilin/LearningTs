@@ -9,13 +9,13 @@ export class MainMenu implements IScenePrototype {
     }
 
     @SceneHandler()
-    public async onText(state: SessionState) {
-        await state.sendTextMessage('Some text here');
+    public async onText(state: SessionState): Promise<SessionState> {
+        // await state.sendTextMessage('Some text here');
         return state;
     }
 
     @SceneHandler()
-    public onLocation(ctx) {
-
+    public onLocation(state): Promise<SessionState> {
+        return state;
     }
 }

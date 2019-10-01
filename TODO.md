@@ -11,3 +11,5 @@
 11. [ ] Create Message Handler
 12. [ ] Create all Bots Api methods
 13. [ ] Create types for Bots Api methods
+14. [ ] Create lobby scene with user storing
+15. [ ] Add Viber/Telegram module switching in global decorator

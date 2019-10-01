@@ -1,11 +1,11 @@
 import { SessionState } from '../SessionState';
 
 export interface IScenePrototype {
-    onText?: (ctx: SessionState) => SessionState;
-    onImage?: (ctx: SessionState) => SessionState;
-    onLocation?: (ctx: SessionState) => SessionState;
-    onContact?: (ctx: SessionState) => SessionState;
-    onAudio?: (ctx: SessionState) => SessionState;
-    onVideo?: (ctx: SessionState) => SessionState;
-    onUrl?: (ctx: SessionState) => SessionState;
+    onText?: (ctx: SessionState) => Promise<SessionState>;
+    onImage?: (ctx: SessionState) => Promise<SessionState>;
+    onLocation?: (ctx: SessionState) => Promise<SessionState>;
+    onContact?: (ctx: SessionState) => Promise<SessionState>;
+    onAudio?: (ctx: SessionState) => Promise<SessionState>;
+    onVideo?: (ctx: SessionState) => Promise<SessionState>;
+    onUrl?: (ctx: SessionState) => Promise<SessionState>;
 }
