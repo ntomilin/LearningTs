@@ -10,20 +10,21 @@ export class SceneManager {
         const message = state.getMessage();
         const scene = await state.getScene();
         if (message.text) {
-            if (SceneManager.scenes[scene]['onText']) {
-                return SceneManager.scenes[scene]['onText'](message);
+            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onText']) {
+                return await SceneManager.scenes[scene]['onText'](state);
             }
         }
         if (message.contact) {
-            if (SceneManager.scenes[scene]['onContact']) {
-                return SceneManager.scenes[scene]['onContact'](message);
+            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onContact']) {
+                return await SceneManager.scenes[scene]['onContact'](state);
             }
         }
         if (message.location) {
-            if (SceneManager.scenes[scene]['onLocation']) {
-                return SceneManager.scenes[scene]['onLocation'](message);
+            if (SceneManager.scenes[scene] && SceneManager.scenes[scene]['onLocation']) {
+                return await SceneManager.scenes[scene]['onLocation'](state);
             }
         }
+        return state;
         // TODO: implement other messages types
         // TODO: return new context after scene edition
     }

@@ -11,12 +11,11 @@ export class MessageHandler {
         this.stateManager = new StateManager();
     }
 
-    public async processMessage(message: SessionState): Promise<any> {
-
-        let state = message.getValue();
-        state = SceneManager.handleMessage(message);
-        await message.setState(state);
-
+    public async processMessage(message: IInnerMessageObject, stateManager: StateManager): Promise<any> {
+        const userState: object = await stateManager.getState(message.user.id);
+        const session: SessionState = new SessionState(message, userState);
+        const newState = (await SceneManager.handleMessage(session)).getState();
+        await stateManager.setState(message.user.id, newState);
         return;
     }
 }

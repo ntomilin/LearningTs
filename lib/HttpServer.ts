@@ -26,12 +26,12 @@ class HttpServer {
 
             const messageHandler: MessageHandler = new MessageHandler();
             const stateManager: StateManager = new StateManager();
+            await SceneManager.registerScenes(this.constructor);
 
             const telegramModule = new TelegramModule(config.BOTS.TELEGRAM, messageHandler, stateManager);
 
-            await RouteManager.bindRoutes(HttpServer.app, this.constructor, services, telegramModule);
+            await RouteManager.bindRoutes(HttpServer.app, this.constructor, services, { telegramModule });
 
-            await SceneManager.registerScenes(this.constructor);
         });
 
     }

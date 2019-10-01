@@ -1,10 +1,9 @@
 import { Logger } from './LoggerManager';
 import { HTTP_METHODS } from './types/HTTP_METHODS';
-import { TelegramModule } from './TelegramModule';
 
 export default class RouteManager {
 
-    public static bindRoutes(app, serverConstructor, services, telegramModule) {
+    public static bindRoutes(app, serverConstructor, services, { telegramModule }) {
         const routes = Reflect.getMetadata('routes', serverConstructor);
 
         app.post('/wh/telegram', telegramModule.processTelegramMessage.bind(telegramModule));

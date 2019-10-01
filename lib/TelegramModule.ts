@@ -18,16 +18,11 @@ export class TelegramModule {
         this.tgApi = new TelegramBot(telegramConfig.TOKEN, { webHook: { https: telegramConfig.WEBHOOK } });
     }
 
-    public processTelegramMessage(req, res): void {
+    public async processTelegramMessage(req, res): Promise<void> {
         res.sendStatus(200);
         const telegramMessageObject: ITelegramMessageObject = req.body;
         const message: IInnerMessageObject = MessageConverter.convertTelegramMessage(telegramMessageObject);
 
-        const session = new SessionState(message, this.stateManager);
-
-        const reply = this.messageHandler.processMessage(session);
-        const telegramObject = MessageConverter.convertToTelegramMessage(reply);
-
-        // send message
+        await this.messageHandler.processMessage(message, this.stateManager);
     }
 }
