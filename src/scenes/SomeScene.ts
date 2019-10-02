@@ -3,19 +3,14 @@ import { Scene } from '../../lib/decorators/Classes';
 import { SceneHandler } from '../../lib/decorators/Methods';
 import { SessionState } from '../../lib/SessionState';
 
-@Scene('MainMenu')
-export class MainMenu implements IScenePrototype {
+@Scene('SomeScene')
+export class SomeScene implements IScenePrototype {
     constructor() {
     }
 
     @SceneHandler()
-    public async onText(state: SessionState): Promise<SessionState> {
-        state.setScene('SomeScene');
-        return state;
-    }
-
-    @SceneHandler()
-    public onLocation(state): Promise<SessionState> {
+    public async onEnter(state: SessionState): Promise<SessionState> {
+        console.log('onEnter in SomeScene');
         return state;
     }
 }

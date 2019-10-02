@@ -13,6 +13,9 @@ export interface IInnerUser {
 }
 
 export interface IInnerMessage {
+    leaveScene?: boolean;
+    enterScene?: boolean;
+
     text?: string;
 
     location?: any;

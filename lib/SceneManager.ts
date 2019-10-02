@@ -1,5 +1,6 @@
 import { Logger } from './LoggerManager';
 import { SessionState } from './SessionState';
+import { Lobby } from './scenes/Lobby';
 
 export class SceneManager {
 
@@ -8,20 +9,26 @@ export class SceneManager {
     public static async handleMessage(state: SessionState) {
         const message = state.getMessage();
         const scene = await state.getScene();
-        if (message.text) {
-            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onText'] === 'function') {
-                return await SceneManager.scenes[scene]['onText'](state);
-            }
+        if (!SceneManager.scenes[scene]) {
+            Logger.error(`Error executing scene:`);
+            Logger.error(`Scene ${ scene } was not found`);
+            return state;
         }
-        if (message.contact) {
-            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onContact'] === 'function') {
-                return await SceneManager.scenes[scene]['onContact'](state);
-            }
+
+        if (message.text && typeof SceneManager.scenes[scene]['onText'] === 'function') {
+            return await SceneManager.scenes[scene]['onText'](state);
         }
-        if (message.location) {
-            if (SceneManager.scenes[scene] && typeof SceneManager.scenes[scene]['onLocation'] === 'function') {
-                return await SceneManager.scenes[scene]['onLocation'](state);
-            }
+        if (message.contact && typeof SceneManager.scenes[scene]['onContact'] === 'function') {
+            return await SceneManager.scenes[scene]['onContact'](state);
+        }
+        if (message.location && typeof SceneManager.scenes[scene]['onLocation'] === 'function') {
+            return await SceneManager.scenes[scene]['onLocation'](state);
+        }
+        if (message.enterScene && typeof SceneManager.scenes[scene]['onEnter'] === 'function') {
+            return await SceneManager.scenes[scene]['onEnter'](state);
+        }
+        if (message.leaveScene && typeof SceneManager.scenes[scene]['onLeave'] === 'function') {
+            return await SceneManager.scenes[scene]['onLeave'](state);
         }
         return state;
     }
@@ -43,6 +50,24 @@ export class SceneManager {
                 SceneManager.scenes[sceneConstructor.name][handler.event] = handler.handler.value.bind(scene);
             }
         }
+        SceneManager.initLobbyScene();
         Logger.info('Finished registering scenes');
+    }
+
+    private static initLobbyScene() {
+        const lobbyScene = new Lobby();
+        SceneManager.scenes['Lobby'] = {};
+        if (lobbyScene['onEnter']) {
+            SceneManager.scenes['Lobby']['onEnter'] = lobbyScene['onEnter'].bind(lobbyScene);
+        }
+        if (lobbyScene['onText']) {
+            SceneManager.scenes['Lobby']['onText'] = lobbyScene['onText'].bind(lobbyScene);
+        }
+        if (lobbyScene['onContact']) {
+            SceneManager.scenes['Lobby']['onContact'] = lobbyScene['onContact'].bind(lobbyScene);
+        }
+        if (lobbyScene['onLocation']) {
+            SceneManager.scenes['Lobby']['onLocation'] = lobbyScene['onLocation'].bind(lobbyScene);
+        }
     }
 }

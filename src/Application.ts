@@ -15,6 +15,7 @@ import { FService } from './services/F.service';
 import { Users } from './entities/Users';
 
 import { MainMenu } from './scenes/MainMenu';
+import { SomeScene } from './scenes/SomeScene';
 
 @Global({
     endpoints: [
@@ -34,6 +35,7 @@ import { MainMenu } from './scenes/MainMenu';
     ],
     scenes: [
         MainMenu,
+        SomeScene
     ]
 })
 export class Application extends HttpServer {

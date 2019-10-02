@@ -38,6 +38,9 @@ export class SessionState {
     public getMessage(): IInnerMessage {
         return this.userMessage.message;
     }
+    public getPlatform(): 'viber' | 'telegram' {
+        return this.userMessage.platform;
+    }
 
     public getTextMessage() {
         return this.userMessage.message.text;
