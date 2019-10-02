@@ -53,10 +53,10 @@ export class SessionState {
 
     public async sendTextMessage(messageObject: any) {
         const userId = this.userMessage.user.id;
-        if (this.platformApi.telegram) {
+        if (this.userMessage.platform === 'telegram') {
             (this.platformApi.telegram as TelegramModule).sendTextMessage(userId, messageObject);
         }
-        if (this.platformApi.viber) {
+        if (this.userMessage.platform === 'viber') {
             // (this.platformApi.tg as ViberModule).sendTextMessage(userId, messageObject);
         }
     }

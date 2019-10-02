@@ -13,6 +13,7 @@ export class MessageHandler {
 
     public async processMessage(message: IInnerMessageObject, stateManager: StateManager, platformApi): Promise<any> {
         const userState: object = await stateManager.getState(message.user.id);
+        // Find user in users table, if absent - push to global
         const session: SessionState = new SessionState(message, userState, platformApi);
         const newState = (await SceneManager.handleMessage(session)).getState();
         await stateManager.setState(message.user.id, newState);

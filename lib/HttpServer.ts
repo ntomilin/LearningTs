@@ -31,7 +31,6 @@ class HttpServer {
             const telegramModule = new TelegramModule(config.BOTS.TELEGRAM, messageHandler, stateManager);
 
             await RouteManager.bindRoutes(HttpServer.app, this.constructor, services, { telegramModule });
-
         });
 
     }

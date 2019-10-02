@@ -27,7 +27,7 @@ export class ServiceManager {
             // Flag, that shows if all the needed services were created and current service is ready to be created
             let allParamsAreCreated = true;
 
-            // indexes of needed servicess
+            // indexes of needed services
             const paramIndexes = [];
 
             for (const neededParam of needParams) {

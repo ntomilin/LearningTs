@@ -7,13 +7,13 @@ export default class DatabaseManager {
 
     public static init(dbConfig: IDBConnection, serverConstructor) {
         const entities = Reflect.getMetadata('entities', serverConstructor);
-        const conf = {
+        const cfg = {
             ...dbConfig,
             entities,
             synchronize: true,
             logging: false
         };
-        return createConnection(conf)
+        return createConnection(cfg)
             .then(() => {
                 Logger.info('Connected to database');
             })
