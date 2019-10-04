@@ -1,8 +1,8 @@
 import * as TelegramBot from 'node-telegram-bot-api';
-import { IBotConfig } from './types/ConfigTypes';
-import { ITelegramMessageObject } from './types/TelegramMessage';
+import { IBotConfig } from '../types/ConfigTypes';
+import { ITelegramMessageObject } from '../types/TelegramMessage';
 import { MessageConverter } from './MessageConverter';
-import { IInnerMessageObject } from './types/InnerMessage';
+import { IInnerMessageObject } from '../types/InnerMessage';
 import { MessageHandler } from './MessageHandler';
 import { StateManager } from './StateManager';
 

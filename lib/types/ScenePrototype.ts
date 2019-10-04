@@ -1,4 +1,4 @@
-import { SessionState } from '../SessionState';
+import { SessionState } from '../bot/SessionState';
 
 export interface IScenePrototype {
     onText?: (state: SessionState) => Promise<SessionState>;

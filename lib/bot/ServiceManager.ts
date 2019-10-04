@@ -1,4 +1,4 @@
-import { Logger } from './LoggerManager';
+import { Logger } from '../LoggerManager';
 
 export class ServiceManager {
 

@@ -3,15 +3,15 @@ import { Logger } from './LoggerManager';
 import * as core from 'express-serve-static-core';
 import 'reflect-metadata';
 import RouteManager from './RouteManager';
-import { ServiceManager } from './ServiceManager';
+import { ServiceManager } from './bot/ServiceManager';
 import DatabaseManager from './DatabaseManager';
 import { IConfig } from './types/ConfigTypes';
-import { TelegramModule } from './TelegramModule';
+import { TelegramModule } from './bot/TelegramModule';
 import * as bodyParser from 'body-parser';
-import { SceneManager } from './SceneManager';
-import { ViberModule } from './ViberModule';
-import { MessageHandler } from './MessageHandler';
-import { StateManager } from './StateManager';
+import { SceneManager } from './bot/SceneManager';
+import { ViberModule } from './bot/ViberModule';
+import { MessageHandler } from './bot/MessageHandler';
+import { StateManager } from './bot/StateManager';
 
 class HttpServer {
     public static app: core.Express;

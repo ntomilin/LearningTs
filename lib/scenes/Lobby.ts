@@ -1,5 +1,5 @@
 import { IScenePrototype } from '../types/ScenePrototype';
-import { SessionState } from '../SessionState';
+import { SessionState } from '../bot/SessionState';
 import { TelegramUsers } from '../entities/TelegramUsers';
 import { ViberUsers } from '../entities/ViberUsers';
 import { Logger } from '../LoggerManager';

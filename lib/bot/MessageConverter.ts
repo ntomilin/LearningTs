@@ -1,5 +1,5 @@
-import { ITelegramMessageObject } from './types/TelegramMessage';
-import { IInnerMessage, IInnerMessageObject } from './types/InnerMessage';
+import { ITelegramMessageObject } from '../types/TelegramMessage';
+import { IInnerMessage, IInnerMessageObject } from '../types/InnerMessage';
 
 export class MessageConverter {
     constructor() {

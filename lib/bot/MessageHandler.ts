@@ -1,9 +1,9 @@
-import { IInnerMessageObject } from './types/InnerMessage';
+import { IInnerMessageObject } from '../types/InnerMessage';
 import { SceneManager } from './SceneManager';
 import { StateManager } from './StateManager';
 import { SessionState } from './SessionState';
-import { TelegramUsers } from './entities/TelegramUsers';
-import { ViberUsers } from './entities/ViberUsers';
+import { TelegramUsers } from '../entities/TelegramUsers';
+import { ViberUsers } from '../entities/ViberUsers';
 
 export class MessageHandler {
 

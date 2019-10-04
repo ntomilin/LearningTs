@@ -1,7 +1,7 @@
 import { IScenePrototype } from '../../lib/types/ScenePrototype';
 import { Scene } from '../../lib/decorators/Classes';
 import { SceneHandler } from '../../lib/decorators/Methods';
-import { SessionState } from '../../lib/SessionState';
+import { SessionState } from '../../lib/bot/SessionState';
 
 @Scene('MainMenu')
 export class MainMenu implements IScenePrototype {

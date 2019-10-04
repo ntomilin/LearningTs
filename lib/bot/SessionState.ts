@@ -1,4 +1,4 @@
-import { IInnerMessage, IInnerMessageObject } from './types/InnerMessage';
+import { IInnerMessage, IInnerMessageObject } from '../types/InnerMessage';
 import { TelegramModule } from './TelegramModule';
 import { ViberModule } from './ViberModule';
 

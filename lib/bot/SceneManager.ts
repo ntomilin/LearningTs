@@ -1,6 +1,6 @@
-import { Logger } from './LoggerManager';
+import { Logger } from '../LoggerManager';
 import { SessionState } from './SessionState';
-import { Lobby } from './scenes/Lobby';
+import { Lobby } from '../scenes/Lobby';
 
 export class SceneManager {
 
