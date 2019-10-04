@@ -4,6 +4,7 @@ export function Global(config: IGlobalObject) {
         Reflect.defineMetadata('services', config.services, constructor);
         Reflect.defineMetadata('entities', config.entities, constructor);
         Reflect.defineMetadata('scenes', config.scenes, constructor);
+        Reflect.defineMetadata('bots', config.bots, constructor);
     };
 }
 
@@ -44,7 +45,11 @@ export interface IGlobalObject {
     services: any[];
     endpoints: any[];
     entities: any[];
-    scenes: any[];
+    scenes?: any[];
+    bots?: {
+        telegram: boolean;
+        viber: boolean;
+    };
 }
 
 export interface IServiceMetadata {

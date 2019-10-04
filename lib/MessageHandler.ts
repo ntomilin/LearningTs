@@ -24,6 +24,12 @@ export class MessageHandler {
         if (!user) {
             await stateManager.setState(message.user.id, { scene: 'Lobby' });
             message.message = { enterScene: true };
+        } else {
+            user.messagesAmount = user.messagesAmount + 1;
+            if (!user.blockedBot) {
+                user.blockedBot = true;
+            }
+            await user.save();
         }
 
         const userState: object = await stateManager.getState(message.user.id);

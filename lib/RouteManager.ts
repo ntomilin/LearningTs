@@ -6,7 +6,10 @@ export default class RouteManager {
     public static bindRoutes(app, serverConstructor, services, { telegramModule }) {
         const routes = Reflect.getMetadata('routes', serverConstructor);
 
-        app.post('/wh/telegram', telegramModule.processTelegramMessage.bind(telegramModule));
+        const { telegram, viber } = Reflect.getMetadata('bots', serverConstructor);
+        if (telegram) {
+            app.post('/wh/telegram', telegramModule.processTelegramMessage.bind(telegramModule));
+        }
 
         return new Promise((resolve) => {
             new RouteManager(app, routes, services);

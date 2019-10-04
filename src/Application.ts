@@ -28,7 +28,7 @@ import { SomeScene } from './scenes/SomeScene';
         BService,
         DService,
         FService,
-        EService,
+        EService
     ],
     entities: [
         Users
@@ -36,7 +36,11 @@ import { SomeScene } from './scenes/SomeScene';
     scenes: [
         MainMenu,
         SomeScene
-    ]
+    ],
+    bots: {
+        telegram: true,
+        viber: false
+    }
 })
 export class Application extends HttpServer {
     constructor(config: IConfig) {

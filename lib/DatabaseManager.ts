@@ -10,8 +10,13 @@ export default class DatabaseManager {
     public static init(dbConfig: IDBConnection, serverConstructor) {
         const entities = Reflect.getMetadata('entities', serverConstructor);
 
-        entities.push(TelegramUsers);
-        entities.push(ViberUsers);
+        const { telegram, viber } = Reflect.getMetadata('bots', serverConstructor);
+        if (telegram) {
+            entities.push(TelegramUsers);
+        }
+        if (telegram) {
+            entities.push(ViberUsers);
+        }
 
         const cfg = {
             ...dbConfig,
