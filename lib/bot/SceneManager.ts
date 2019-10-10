@@ -51,7 +51,7 @@ export class SceneManager {
         const scenesConstructors = Reflect.getMetadata('scenes', serverConstructor);
         for (const sceneConstructor of scenesConstructors) {
 
-            Logger.info(`Registering scene ${ sceneConstructor.name }`);
+            Logger.info(`Registering scene [${ sceneConstructor.name }]`);
             SceneManager.scenes[sceneConstructor.name] = {};
 
             const handlers: Array<{ handler: { value: () => any }, event: string }> =
