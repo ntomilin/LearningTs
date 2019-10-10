@@ -10,7 +10,7 @@ export class SomeScene implements IScenePrototype {
 
     @SceneHandler()
     public async onEnter(state: SessionState): Promise<SessionState> {
-        console.log('onEnter in SomeScene');
+        console.log('SomeScene onEnter');
         return state;
     }
 }

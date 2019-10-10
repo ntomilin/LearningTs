@@ -13,8 +13,9 @@ export class TelegramModule {
     constructor(telegramConfig: IBotConfig,
                 private readonly messageHandler: MessageHandler,
                 private readonly stateManager: StateManager) {
-        // @ts-ignore
-        this.tgApi = new TelegramBot(telegramConfig.TOKEN, { webHook: { https: telegramConfig.WEBHOOK } });
+
+        this.tgApi = new TelegramBot(telegramConfig.TOKEN);
+        this.tgApi.setWebHook(telegramConfig.WEBHOOK);
     }
 
     public async processTelegramMessage(req, res): Promise<void> {

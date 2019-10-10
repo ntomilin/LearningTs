@@ -42,8 +42,4 @@ import { SomeScene } from './scenes/SomeScene';
         viber: false
     }
 })
-export class Application extends HttpServer {
-    constructor(config: IConfig) {
-        super(config);
-    }
-}
+export class Application extends HttpServer { constructor(config: IConfig) { super(config); } }

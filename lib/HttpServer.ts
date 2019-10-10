@@ -3,7 +3,7 @@ import { Logger } from './LoggerManager';
 import * as core from 'express-serve-static-core';
 import 'reflect-metadata';
 import RouteManager from './RouteManager';
-import { ServiceManager } from './bot/ServiceManager';
+import { ServiceManager } from './ServiceManager';
 import DatabaseManager from './DatabaseManager';
 import { IConfig } from './types/ConfigTypes';
 import { TelegramModule } from './bot/TelegramModule';

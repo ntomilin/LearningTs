@@ -39,15 +39,14 @@ export class MessageHandler {
 
         const newSessionState = await SceneManager.handleMessage(session);
 
-        const newState = newSessionState.getState();
+        let newState = newSessionState.getState();
         const newScene = newSessionState.getScene();
 
-        await stateManager.setState(message.user.id, newState);
-
         if (oldScene !== newScene) {
-            message.message = { enterScene: true };
-            await this.processMessage(message, stateManager, platformApi);
+            newState = await SceneManager.handleSceneLeave(newState, oldScene);
+            newState = await SceneManager.handleSceneEnter(newState, newScene);
         }
+        await stateManager.setState(message.user.id, newState);
 
         return;
     }

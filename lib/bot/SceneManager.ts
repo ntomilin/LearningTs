@@ -6,12 +6,31 @@ export class SceneManager {
 
     private static readonly scenes = {};
 
+    public static async handleSceneLeave(state: SessionState, scene: string) {
+        if (!SceneManager.checkScene(scene)) {
+            return state;
+        }
+
+        if (typeof SceneManager.scenes[scene]['onLeave'] === 'function') {
+            return await SceneManager.scenes[scene]['onLeave'](state);
+        }
+    }
+
+    public static async handleSceneEnter(state: SessionState, scene: string) {
+        if (!SceneManager.checkScene(scene)) {
+            return state;
+        }
+
+        if (typeof SceneManager.scenes[scene]['onEnter'] === 'function') {
+            return await SceneManager.scenes[scene]['onEnter'](state);
+        }
+    }
+
     public static async handleMessage(state: SessionState) {
         const message = state.getMessage();
         const scene = await state.getScene();
-        if (!SceneManager.scenes[scene]) {
-            Logger.error(`Error executing scene:`);
-            Logger.error(`Scene ${ scene } was not found`);
+
+        if (!SceneManager.checkScene(scene)) {
             return state;
         }
 
@@ -23,12 +42,6 @@ export class SceneManager {
         }
         if (message.location && typeof SceneManager.scenes[scene]['onLocation'] === 'function') {
             return await SceneManager.scenes[scene]['onLocation'](state);
-        }
-        if (message.enterScene && typeof SceneManager.scenes[scene]['onEnter'] === 'function') {
-            return await SceneManager.scenes[scene]['onEnter'](state);
-        }
-        if (message.leaveScene && typeof SceneManager.scenes[scene]['onLeave'] === 'function') {
-            return await SceneManager.scenes[scene]['onLeave'](state);
         }
         return state;
     }
@@ -57,6 +70,9 @@ export class SceneManager {
     private static initLobbyScene() {
         const lobbyScene = new Lobby();
         SceneManager.scenes['Lobby'] = {};
+        if (lobbyScene['onLeave']) {
+            SceneManager.scenes['Lobby']['onLeave'] = lobbyScene['onLeave'].bind(lobbyScene);
+        }
         if (lobbyScene['onEnter']) {
             SceneManager.scenes['Lobby']['onEnter'] = lobbyScene['onEnter'].bind(lobbyScene);
         }
@@ -69,5 +85,14 @@ export class SceneManager {
         if (lobbyScene['onLocation']) {
             SceneManager.scenes['Lobby']['onLocation'] = lobbyScene['onLocation'].bind(lobbyScene);
         }
+    }
+
+    private static checkScene(scene): boolean {
+        if (!SceneManager.scenes[scene]) {
+            Logger.error(`Error executing scene:`);
+            Logger.error(`Scene ${ scene } was not found`);
+            return false;
+        }
+        return true;
     }
 }
